@@ -4,10 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import pl.dolega.orderservice.OrderHeader.OrderHeader;
-import pl.dolega.orderservice.OrderHeader.OrderHeaderRepository;
+import pl.dolega.orderservice.orderHeader.OrderHeader;
+import pl.dolega.orderservice.orderHeader.OrderHeaderRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -17,9 +18,23 @@ public class OrderHeaderRepositoryTest {
     OrderHeaderRepository orderHeaderRepository;
 
     @Test
-    void getByIdTest() {
+    void testGetById() {
         OrderHeader orderHeader = orderHeaderRepository.getReferenceById(1L);
         assertThat(orderHeader).isNotNull();
-        assertThat(orderHeader.getCustomerName()).isEqualTo("Craig Walls");
+        assertThat(orderHeader.getCustomer()).isEqualTo("Craig Walls");
+    }
+
+    @Test
+    void testSaveOrder() {
+        OrderHeader orderHeader = new OrderHeader();
+        orderHeader.setCustomer("New Customer");
+
+        OrderHeader savedOrder = orderHeaderRepository.save(orderHeader);
+        assertNotNull(savedOrder);
+        assertNotNull(savedOrder.getId());
+
+        OrderHeader fetchedOrder = orderHeaderRepository.getReferenceById(savedOrder.getId());
+        assertNotNull(fetchedOrder);
+        assertNotNull(fetchedOrder.getId());
     }
 }
