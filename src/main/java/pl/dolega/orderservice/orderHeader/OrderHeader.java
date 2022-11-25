@@ -1,12 +1,10 @@
 package pl.dolega.orderservice.orderHeader;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Data;
 import pl.dolega.orderservice.BaseEntity;
 import pl.dolega.orderservice.address.Address;
+import pl.dolega.orderservice.orderStatus.OrderStatus;
 
 import java.util.Objects;
 
@@ -28,6 +26,8 @@ public class OrderHeader extends BaseEntity {
     private Address shippingAddress;
     @Embedded
     private Address billToAddress;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @Override
     public boolean equals(Object o) {
@@ -37,11 +37,12 @@ public class OrderHeader extends BaseEntity {
         OrderHeader that = (OrderHeader) o;
         return Objects.equals(customer, that.customer) &&
                 Objects.equals(shippingAddress, that.shippingAddress) &&
-                Objects.equals(billToAddress, that.billToAddress);
+                Objects.equals(billToAddress, that.billToAddress) &&
+                orderStatus == that.orderStatus;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), customer, shippingAddress, billToAddress);
+        return Objects.hash(super.hashCode(), customer, shippingAddress, billToAddress, orderStatus);
     }
 }

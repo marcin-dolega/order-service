@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import pl.dolega.orderservice.orderHeader.OrderHeader;
 import pl.dolega.orderservice.orderHeader.OrderHeaderRepository;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
@@ -16,13 +15,6 @@ public class OrderHeaderRepositoryTest {
 
     @Autowired
     OrderHeaderRepository orderHeaderRepository;
-
-    @Test
-    void testGetById() {
-        OrderHeader orderHeader = orderHeaderRepository.getReferenceById(1L);
-        assertThat(orderHeader).isNotNull();
-        assertThat(orderHeader.getCustomer()).isEqualTo("Craig Walls");
-    }
 
     @Test
     void testSaveOrder() {
