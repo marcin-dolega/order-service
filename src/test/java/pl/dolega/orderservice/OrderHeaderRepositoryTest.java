@@ -17,7 +17,7 @@ public class OrderHeaderRepositoryTest {
     OrderHeaderRepository orderHeaderRepository;
 
     @Test
-    void getById() {
+    void getByIdTest() {
         OrderHeader orderHeader = orderHeaderRepository.getReferenceById(1L);
         assertThat(orderHeader).isNotNull();
         assertThat(orderHeader.getCustomerName()).isEqualTo("Craig Walls");
