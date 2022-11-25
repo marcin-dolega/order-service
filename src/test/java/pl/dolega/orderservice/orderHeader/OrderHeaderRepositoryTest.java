@@ -1,11 +1,11 @@
-package pl.dolega.orderservice;
+package pl.dolega.orderservice.orderHeader;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import pl.dolega.orderservice.orderHeader.OrderHeader;
-import pl.dolega.orderservice.orderHeader.OrderHeaderRepository;
+import pl.dolega.orderservice.order.orderHeader.OrderHeader;
+import pl.dolega.orderservice.order.orderHeader.OrderHeaderRepository;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -29,5 +29,6 @@ public class OrderHeaderRepositoryTest {
         assertNotNull(fetchedOrder);
         assertNotNull(fetchedOrder.getId());
         assertNotNull(fetchedOrder.getCreatedDate());
+        assertNotNull(fetchedOrder.getLastModifiedDate());
     }
 }

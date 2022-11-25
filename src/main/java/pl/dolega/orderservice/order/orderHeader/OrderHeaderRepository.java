@@ -1,4 +1,4 @@
-package pl.dolega.orderservice.orderHeader;
+package pl.dolega.orderservice.order.orderHeader;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

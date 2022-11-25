@@ -1,6 +1,7 @@
 package pl.dolega.orderservice.orderHeader;
 
 import org.junit.jupiter.api.Test;
+import pl.dolega.orderservice.order.orderHeader.OrderHeader;
 
 import static org.junit.jupiter.api.Assertions.*;
 

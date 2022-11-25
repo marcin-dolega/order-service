@@ -1,4 +1,4 @@
-package pl.dolega.orderservice.orderStatus;
+package pl.dolega.orderservice.order.orderStatus;
 
 public enum OrderStatus {
 

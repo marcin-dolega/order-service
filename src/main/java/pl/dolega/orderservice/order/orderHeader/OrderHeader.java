@@ -1,10 +1,10 @@
-package pl.dolega.orderservice.orderHeader;
+package pl.dolega.orderservice.order.orderHeader;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import pl.dolega.orderservice.BaseEntity;
-import pl.dolega.orderservice.address.Address;
-import pl.dolega.orderservice.orderStatus.OrderStatus;
+import pl.dolega.orderservice.order.address.Address;
+import pl.dolega.orderservice.order.orderStatus.OrderStatus;
 
 import java.util.Objects;
 
