@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import pl.dolega.orderservice.BaseEntity;
 import pl.dolega.orderservice.order.address.Address;
+import pl.dolega.orderservice.order.orderLine.OrderLine;
 import pl.dolega.orderservice.order.orderStatus.OrderStatus;
 
 import java.util.Objects;
+import java.util.Set;
 
 
 @Data
@@ -22,12 +24,14 @@ import java.util.Objects;
 public class OrderHeader extends BaseEntity {
 
     private String customer;
-    @Embedded
     private Address shippingAddress;
-    @Embedded
     private Address billToAddress;
+
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
+    @OneToMany(mappedBy = "orderHeader")
+    private Set<OrderLine> orderLines;
 
     @Override
     public boolean equals(Object o) {
@@ -35,14 +39,11 @@ public class OrderHeader extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         OrderHeader that = (OrderHeader) o;
-        return Objects.equals(customer, that.customer) &&
-                Objects.equals(shippingAddress, that.shippingAddress) &&
-                Objects.equals(billToAddress, that.billToAddress) &&
-                orderStatus == that.orderStatus;
+        return Objects.equals(customer, that.customer) && Objects.equals(shippingAddress, that.shippingAddress) && Objects.equals(billToAddress, that.billToAddress) && orderStatus == that.orderStatus && Objects.equals(orderLines, that.orderLines);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), customer, shippingAddress, billToAddress, orderStatus);
+        return Objects.hash(super.hashCode(), customer, shippingAddress, billToAddress, orderStatus, orderLines);
     }
 }
