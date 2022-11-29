@@ -1,4 +1,4 @@
-package pl.dolega.orderservice.order.address;
+package pl.dolega.orderservice.order;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;

@@ -5,14 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import pl.dolega.orderservice.order.orderHeader.OrderHeader;
-import pl.dolega.orderservice.order.orderHeader.OrderHeaderRepository;
-import pl.dolega.orderservice.order.orderLine.OrderLine;
+import pl.dolega.orderservice.order.OrderHeader;
+import pl.dolega.orderservice.order.OrderHeaderRepository;
+import pl.dolega.orderservice.order.OrderLine;
 import pl.dolega.orderservice.product.Product;
 import pl.dolega.orderservice.product.ProductRepository;
 import pl.dolega.orderservice.product.ProductStatus;
-
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -47,8 +45,7 @@ public class OrderHeaderRepositoryTest {
 
         orderLine.setProduct(product);
 
-        orderHeader.setOrderLines(Set.of(orderLine));
-//        orderLine.setOrderHeader(orderHeader);
+        orderHeader.addOrderLine(orderLine);
 
         OrderHeader savedOrder = orderHeaderRepository.save(orderHeader);
 
