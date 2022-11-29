@@ -8,7 +8,6 @@ import pl.dolega.orderservice.product.Product;
 
 import java.util.Objects;
 
-@Data
 @Entity
 public class OrderLine extends BaseEntity {
 
@@ -19,6 +18,30 @@ public class OrderLine extends BaseEntity {
 
     @ManyToOne
     private Product product;
+
+    public Integer getQuantityOrdered() {
+        return quantityOrdered;
+    }
+
+    public void setQuantityOrdered(Integer quantityOrdered) {
+        this.quantityOrdered = quantityOrdered;
+    }
+
+    public OrderHeader getOrderHeader() {
+        return orderHeader;
+    }
+
+    public void setOrderHeader(OrderHeader orderHeader) {
+        this.orderHeader = orderHeader;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     @Override
     public boolean equals(Object o) {
