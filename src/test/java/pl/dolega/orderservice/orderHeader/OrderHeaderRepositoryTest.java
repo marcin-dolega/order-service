@@ -28,9 +28,6 @@ public class OrderHeaderRepositoryTest {
     @Autowired
     ProductRepository productRepository;
 
-    @Autowired
-    OrderApprovalRepository orderApprovalRepository;
-
     Product product;
 
     @BeforeEach
@@ -58,8 +55,7 @@ public class OrderHeaderRepositoryTest {
 
         OrderApproval approval = new OrderApproval();
         approval.setApprovedBy("me");
-        OrderApproval savedApproval = orderApprovalRepository.save(approval);
-        orderHeader.setOrderApproval(savedApproval);
+        orderHeader.setOrderApproval(approval);
 
         OrderHeader savedOrder = orderHeaderRepository.save(orderHeader);
 
