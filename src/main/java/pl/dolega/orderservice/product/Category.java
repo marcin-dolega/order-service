@@ -1,12 +1,10 @@
-package pl.dolega.orderservice.category;
+package pl.dolega.orderservice.product;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import lombok.Data;
 import pl.dolega.orderservice.BaseEntity;
-import pl.dolega.orderservice.product.Product;
 
 import java.util.Objects;
 import java.util.Set;

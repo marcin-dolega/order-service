@@ -1,9 +1,7 @@
 package pl.dolega.orderservice.product;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import pl.dolega.orderservice.BaseEntity;
-import pl.dolega.orderservice.category.Category;
 
 import java.util.Objects;
 import java.util.Set;

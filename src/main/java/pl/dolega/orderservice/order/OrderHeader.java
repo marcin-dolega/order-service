@@ -3,6 +3,7 @@ package pl.dolega.orderservice.order;
 import jakarta.persistence.*;
 import lombok.Data;
 import pl.dolega.orderservice.BaseEntity;
+import pl.dolega.orderservice.customer.Customer;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,7 +24,8 @@ import java.util.Set;
 @Entity
 public class OrderHeader extends BaseEntity {
 
-    private String customer;
+    @ManyToOne
+    private Customer customer;
 
     @Embedded
     private Address shippingAddress;
@@ -37,19 +39,14 @@ public class OrderHeader extends BaseEntity {
     @OneToMany(mappedBy = "orderHeader", cascade = CascadeType.PERSIST)
     private Set<OrderLine> orderLines;
 
-    public void addOrderLine(OrderLine orderLine) {
-        if (orderLines == null) {
-            orderLines = new HashSet<>();
-        }
-        orderLines.add(orderLine);
-        orderLine.setOrderHeader(this);
-    }
+    @OneToOne
+    private OrderApproval orderApproval;
 
-    public String getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -85,6 +82,14 @@ public class OrderHeader extends BaseEntity {
         this.orderLines = orderLines;
     }
 
+    public OrderApproval getOrderApproval() {
+        return orderApproval;
+    }
+
+    public void setOrderApproval(OrderApproval orderApproval) {
+        this.orderApproval = orderApproval;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,5 +102,13 @@ public class OrderHeader extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), customer, shippingAddress, billToAddress, orderStatus, orderLines);
+    }
+
+    public void addOrderLine(OrderLine orderLine) {
+        if (orderLines == null) {
+            orderLines = new HashSet<>();
+        }
+        orderLines.add(orderLine);
+        orderLine.setOrderHeader(this);
     }
 }
