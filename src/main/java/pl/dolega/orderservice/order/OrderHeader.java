@@ -1,7 +1,6 @@
 package pl.dolega.orderservice.order;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import pl.dolega.orderservice.BaseEntity;
 import pl.dolega.orderservice.customer.Customer;
 
@@ -10,7 +9,6 @@ import java.util.Objects;
 import java.util.Set;
 
 
-//@Data
 @AttributeOverrides({
         @AttributeOverride(name = "shippingAddress.address", column = @Column(name = "shipping_address")),
         @AttributeOverride(name = "shippingAddress.city", column = @Column(name = "shipping_city")),
@@ -36,7 +34,7 @@ public class OrderHeader extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "orderHeader", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "orderHeader", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Set<OrderLine> orderLines;
 
     @OneToOne(cascade = CascadeType.PERSIST)
