@@ -1,6 +1,8 @@
 package pl.dolega.orderservice.orderHeader;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import pl.dolega.orderservice.BaseEntity;
 import pl.dolega.orderservice.address.Address;
 import pl.dolega.orderservice.customer.Customer;
@@ -38,10 +40,12 @@ public class OrderHeader extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "orderHeader", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "orderHeader", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private Set<OrderLine> orderLines;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "orderHeader")
+    @Fetch(FetchMode.SELECT)
     private OrderApproval orderApproval;
 
     public Customer getCustomer() {

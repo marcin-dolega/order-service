@@ -48,8 +48,12 @@ select
     o1_0.shipping_city,
     o1_0.shipping_state,
     o1_0.shipping_zip_code
-from order_header o1_0
-    left join order_approval o2_0 on o1_0.id=o2_0.order_header_id where o1_0.id=?
+from
+    order_header o1_0
+left join
+    order_approval o2_0 on o1_0.id=o2_0.order_header_id
+where
+    o1_0.id=?
 
 select
     c1_0.id,
@@ -62,5 +66,26 @@ select
     c1_0.email,
     c1_0.last_modified_date,
     c1_0.phone
-from customer c1_0
-where c1_0.id=?
+from
+    customer c1_0
+where
+    c1_0.id=?;
+
+select
+    o1_0.order_header_id,
+    o1_0.id,
+    o1_0.created_date,
+    o1_0.last_modified_date,
+    p1_0.id,
+    p1_0.created_date,
+    p1_0.description,
+    p1_0.last_modified_date,
+    p1_0.product_status,
+    o1_0.quantity_ordered
+from
+    order_line o1_0
+left join
+    product p1_0 on p1_0.id=o1_0.product_id
+where
+    o1_0.order_header_id=?;
+
