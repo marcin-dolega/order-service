@@ -1,8 +1,12 @@
-package pl.dolega.orderservice.order;
+package pl.dolega.orderservice.orderHeader;
 
 import jakarta.persistence.*;
 import pl.dolega.orderservice.BaseEntity;
+import pl.dolega.orderservice.address.Address;
 import pl.dolega.orderservice.customer.Customer;
+import pl.dolega.orderservice.orderApproval.OrderApproval;
+import pl.dolega.orderservice.orderLine.OrderLine;
+import pl.dolega.orderservice.orderStatus.OrderStatus;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -37,7 +41,7 @@ public class OrderHeader extends BaseEntity {
     @OneToMany(mappedBy = "orderHeader", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Set<OrderLine> orderLines;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private OrderApproval orderApproval;
 
     public Customer getCustomer() {

@@ -4,8 +4,8 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import pl.dolega.orderservice.BaseEntity;
-import pl.dolega.orderservice.order.Address;
-import pl.dolega.orderservice.order.OrderHeader;
+import pl.dolega.orderservice.address.Address;
+import pl.dolega.orderservice.orderHeader.OrderHeader;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;

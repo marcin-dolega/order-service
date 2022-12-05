@@ -1,6 +1,7 @@
 package pl.dolega.orderservice.orderHeader;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import pl.dolega.orderservice.customer.Customer;
 import pl.dolega.orderservice.customer.CustomerRepository;
-import pl.dolega.orderservice.order.*;
+import pl.dolega.orderservice.orderApproval.OrderApproval;
+import pl.dolega.orderservice.orderLine.OrderLine;
 import pl.dolega.orderservice.product.Product;
 import pl.dolega.orderservice.product.ProductRepository;
 import pl.dolega.orderservice.product.ProductStatus;
@@ -105,6 +107,10 @@ public class OrderHeaderRepositoryTest {
         OrderLine orderLine = new OrderLine();
         orderLine.setQuantityOrdered(3);
         orderLine.setProduct(product);
+
+        OrderApproval orderApproval = new OrderApproval();
+        orderApproval.setApprovedBy("me");
+        orderHeader.setOrderApproval(orderApproval);
 
         orderHeader.addOrderLine(orderLine);
         OrderHeader savedOrder = orderHeaderRepository.saveAndFlush(orderHeader);

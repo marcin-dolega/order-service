@@ -1,9 +1,9 @@
-package pl.dolega.orderservice.order;
+package pl.dolega.orderservice.orderLine;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
 import pl.dolega.orderservice.BaseEntity;
+import pl.dolega.orderservice.orderHeader.OrderHeader;
 import pl.dolega.orderservice.product.Product;
 
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package pl.dolega.orderservice.order;
+package pl.dolega.orderservice.orderApproval;
 
 import jakarta.persistence.Entity;
 import pl.dolega.orderservice.BaseEntity;
