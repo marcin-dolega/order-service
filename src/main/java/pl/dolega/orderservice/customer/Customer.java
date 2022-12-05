@@ -3,6 +3,7 @@ package pl.dolega.orderservice.customer;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Version;
 import pl.dolega.orderservice.BaseEntity;
 import pl.dolega.orderservice.address.Address;
 import pl.dolega.orderservice.orderHeader.OrderHeader;
@@ -22,6 +23,9 @@ public class Customer extends BaseEntity {
     private String phone;
 
     private String email;
+
+    @Version
+    private Integer version;
 
     @OneToMany(mappedBy = "customer")
     private Set<OrderHeader> orders = new LinkedHashSet<>();
@@ -56,6 +60,14 @@ public class Customer extends BaseEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public Set<OrderHeader> getOrders() {

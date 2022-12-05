@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.dolega.orderservice.customer.Customer;
+import pl.dolega.orderservice.customer.CustomerRepository;
 import pl.dolega.orderservice.orderHeader.OrderHeader;
 import pl.dolega.orderservice.orderHeader.OrderHeaderRepository;
 
@@ -15,6 +17,9 @@ public class Bootstrap implements CommandLineRunner {
 
     @Autowired
     BootstrapOrderService bootstrapOrderService;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
 //    @Transactional
 //    public void readOrderData() {
@@ -30,6 +35,13 @@ public class Bootstrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         bootstrapOrderService.readOrderData();
+
+        Customer customer = new Customer();
+        customer.setCustomerName("Testing Version");
+        Customer savedCustomer = customerRepository.save(customer);
+
+        System.out.println("Version is: " + savedCustomer.getVersion());
+        customerRepository.deleteById(savedCustomer.getId());
     }
 
 }
