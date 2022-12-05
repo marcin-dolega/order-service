@@ -1,5 +1,6 @@
 package pl.dolega.orderservice;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -38,13 +39,14 @@ public class DataLoadTest {
     @Autowired
     ProductRepository productRepository;
 
+    @Disabled
     @Rollback(value = false)
     @Test
     void testDataLoader() {
         List<Product> products = loadProducts();
         Customer customer = loadCustomers();
 
-        int ordersToCreate = 10;
+        int ordersToCreate = 1000;
 
         for (int i = 0; i < ordersToCreate; i++) {
             System.out.println("Creating order #: " + i);
@@ -64,7 +66,7 @@ public class DataLoadTest {
             OrderLine orderLine = new OrderLine();
             orderLine.setProduct(product);
             orderLine.setQuantityOrdered(random.nextInt(20));
-            orderHeader.getOrderLines().add(orderLine);
+            orderHeader.addOrderLine(orderLine);
         });
         return orderHeaderRepository.save(orderHeader);
     }
