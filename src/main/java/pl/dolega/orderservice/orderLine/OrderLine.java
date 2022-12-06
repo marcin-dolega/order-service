@@ -2,6 +2,7 @@ package pl.dolega.orderservice.orderLine;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
 import pl.dolega.orderservice.BaseEntity;
 import pl.dolega.orderservice.orderHeader.OrderHeader;
 import pl.dolega.orderservice.product.Product;
@@ -18,6 +19,9 @@ public class OrderLine extends BaseEntity {
 
     @ManyToOne
     private Product product;
+
+    @Version
+    private Integer version;
 
     public Integer getQuantityOrdered() {
         return quantityOrdered;
@@ -41,6 +45,14 @@ public class OrderLine extends BaseEntity {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     @Override
