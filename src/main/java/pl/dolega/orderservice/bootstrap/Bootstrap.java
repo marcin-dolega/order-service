@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 import pl.dolega.orderservice.customer.Customer;
 import pl.dolega.orderservice.customer.CustomerRepository;
 import pl.dolega.orderservice.orderHeader.OrderHeaderRepository;
+import pl.dolega.orderservice.product.Product;
+import pl.dolega.orderservice.product.ProductService;
+import pl.dolega.orderservice.product.ProductStatus;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
@@ -19,19 +22,26 @@ public class Bootstrap implements CommandLineRunner {
     @Autowired
     CustomerRepository customerRepository;
 
-//    @Transactional
-//    public void readOrderData() {
-//        OrderHeader orderHeader = orderHeaderRepository.findById(1L).get();
-//
-//        orderHeader.getOrderLines().forEach(ol -> {
-//            System.out.println(ol.getProduct().getDescription());
-//            ol.getProduct().getCategories().forEach(
-//                    cat -> System.out.println(cat.getDescription()));
-//        });
-//    }
+    @Autowired
+    ProductService productService;
+
+    private void updateProduct() {
+        Product product = new Product();
+        product.setDescription("My Product");
+        product.setProductStatus(ProductStatus.IN_STOCK);
+
+        Product savedProduct = productService.saveProduct(product);
+
+        Product savedProduct2 = productService.updateQOH(savedProduct.getId(), 25);
+
+        System.out.println("Updated Qty: " + savedProduct2.getQuantityOnHand());
+    }
 
     @Override
     public void run(String... args) throws Exception {
+
+        updateProduct();
+
         bootstrapOrderService.readOrderData();
 
         Customer customer = new Customer();
