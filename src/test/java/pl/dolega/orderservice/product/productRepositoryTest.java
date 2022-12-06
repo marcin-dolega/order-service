@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
@@ -36,5 +37,21 @@ public class productRepositoryTest {
         assertNotNull(fetchedProduct.getDescription());
         assertNotNull(fetchedProduct.getCreatedDate());
         assertNotNull(fetchedProduct.getLastModifiedDate());
+    }
+
+    @Test
+    void addAndUpdateProduct() {
+        Product product = new Product();
+        product.setDescription("My Product");
+        product.setProductStatus(ProductStatus.IN_STOCK);
+
+        Product savedProduct = productRepository.save(product);
+
+        savedProduct.setQuantityOnHand(25);
+
+        Product savedProduct2 = productRepository.saveAndFlush(savedProduct);
+
+        assertNotNull(savedProduct2);
+        assertEquals(25, savedProduct2.getQuantityOnHand());
     }
 }

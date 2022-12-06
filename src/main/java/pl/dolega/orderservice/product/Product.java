@@ -11,6 +11,8 @@ public class Product extends BaseEntity {
 
     private String description;
 
+    private Integer quantityOnHand = 0;
+
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
 
@@ -26,6 +28,14 @@ public class Product extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getQuantityOnHand() {
+        return quantityOnHand;
+    }
+
+    public void setQuantityOnHand(Integer quantityOnHand) {
+        this.quantityOnHand = quantityOnHand;
     }
 
     public ProductStatus getProductStatus() {
